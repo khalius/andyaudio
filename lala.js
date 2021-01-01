@@ -44,7 +44,7 @@ async function main() {
         let form = new FormData();
         form.append('archivo', blob);
         $.ajax({
-            url: serverPath,
+            url: `${serverPath}/upAudio`,
             type: 'POST',
             data: form,
             processData: false,
