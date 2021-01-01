@@ -4,6 +4,9 @@ const fs = require('fs-extra');
 const path = require('path');
 const multer = require('multer');
 const cors = require('cors');
+const dir = path.join(__dirname, 'audios');
+
+if (!fs.existsSync(dir)) fs.mkdirSync(dir);
 
 app.set('port', process.env.PORT || 3000);
 app.use(express.static(path.join(__dirname, 'audios')));
