@@ -15,8 +15,8 @@ async function main() {
     </div>`;
     const imgBtn = `<i class="fa fa-picture-o" id="imgUpBtn" style="margin-left:10px;cursor:pointer;"></i>`;
     const urlImg = `<div id="boxUrlImg" style="display:flex;width:80%;margin:auto">
-        <input type="text" maxlength="200" placeholder="Ingrese el LINK de la imágen" style="background:#FFFCD2;border:none;width:100%;border-bottom-left-radius:20px;border-top-left-radius:20px;font-weight:bold;"/>
-        <button style="border:none;background:tomato;border-bottom-right-radius:20px;border-top-right-radius:20px;font-weight:bold;" id="btnUpImg">Enviar</button>
+        <input type="text" maxlength="200" placeholder="Ingrese el LINK de la imágen" style="background:#e1fcff;border:none;width:100%;border-bottom-left-radius:20px;border-top-left-radius:20px;font-weight:bold;"/>
+        <button style="border:none;background:#51ce86;border-bottom-right-radius:20px;border-top-right-radius:20px;font-weight:bold;" id="btnUpImg">Enviar</button>
     </div>`
     $('.textarea-icons-wrapper').append(audioBtn);
     $('.textarea-icons-wrapper').append(imgBtn);
