@@ -6,13 +6,21 @@ async function main() {
     const mediaRecorder = new MediaRecorder(stream);
     let state = false;
     let chunks = [];
+    let stateImg = true;
     let serverPath = `https://andyaudio.herokuapp.com`;
-    let falseStyle = { width: '40px', heigth: '40px', borderRadius: '9999px', background: '#51ce86', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' };
+    let falseStyle = { width: '30px', height: '30px', borderRadius: '9999px', background: '#51ce86', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' };
     const audioBtn = `<div id="audioBtn">
         <i class="fa fa-microphone" />
         <p id="audioTxt"></p>
     </div>`;
+    const imgBtn = `<i class="fa fa-picture-o" id="imgUpBtn" style="margin-left:10px;cursor:pointer;"></i>`;
+    const urlImg = `<div id="boxUrlImg" style="display:flex;width:80%;margin:auto">
+        <input type="text" maxlength="200" placeholder="Ingrese el LINK de la imágen" style="background:#FFFCD2;border:none;width:100%;border-bottom-left-radius:20px;border-top-left-radius:20px;font-weight:bold;"/>
+        <button style="border:none;background:tomato;border-bottom-right-radius:20px;border-top-right-radius:20px;font-weight:bold;" id="btnUpImg">Enviar</button>
+    </div>`
     $('.textarea-icons-wrapper').append(audioBtn);
+    $('.textarea-icons-wrapper').append(imgBtn);
+    $('#marqueeContainer').append(urlImg);
     $('#audioBtn').css(falseStyle);
     x.receiveText = (a, b, c) => {
         let z = /^\[audio\]/i;
@@ -34,6 +42,26 @@ async function main() {
             mediaRecorder.stop();
             state = false;
         }
+    });
+    $('#imgUpBtn').click(e => {
+        if (!stateImg) {
+            $('#boxUrlImg').show('slow');
+            stateImg = true;
+            return null;
+        } else {
+            $('#boxUrlImg').hide('slow');
+            stateImg = false;
+            return null;
+        }
+
+    });
+    $('#btnUpImg').click(e => {
+        let val = $('#boxUrlImg input').val();
+        if (!val || val.length <= 0) return null;
+        let valParsed = val.replace(/https?\:/, '');
+        x.emojiArea[0].emojioneArea.setHTML(`<img class='gif' src='${valParsed}'/>`);
+        x.sendText();
+        $('#boxUrlImg input').val('');
     });
     mediaRecorder.ondataavailable = e => {
         chunks.push(e.data);
