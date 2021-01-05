@@ -7,6 +7,7 @@ async function main() {
     let state = false;
     let chunks = [];
     let serverPath = `https://andyaudio.herokuapp.com`;
+    let serverPathParsed = `//andyaudio.herokuapp.com`;
     let falseStyle = { width: '30px', height: '30px', borderRadius: '9999px', background: '#51ce86', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' };
     const audioBtn = `<div id="audioBtn">
         <i class="fa fa-microphone" />
@@ -62,7 +63,7 @@ async function main() {
             processData: false,
             contentType: false,
             success: response => {
-                x.emojiArea[0].emojioneArea.setHTML(`<img class="gif" src="${serverPath}/imgs/${response}"/>`);
+                x.emojiArea[0].emojioneArea.setHTML(`<img class="gif" src="${serverPathParsed}/imgs/${response}"/>`);
                 x.sendText();
             },
             error: err => console.log(err)
