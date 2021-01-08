@@ -105,10 +105,10 @@ async function main() {
             }
         }
         if (countEvent >= 4) {
-            if ((Date.now() - tempUser['time']) < 100) {
+            if ((Date.now() - tempUser['time']) < 300) {
                 blackList.push(packet.data[1]['username']);
                 alert('Amenaza neutralizada, siga chateando :)');
-                console.log(blackList);
+                console.log(blackList, packet.data[0]);
                 $("div.tab-content .tab-pane.active").eq(0)['empty']();
                 countEvent = 0;
                 return null;
