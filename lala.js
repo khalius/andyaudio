@@ -101,6 +101,7 @@ async function main() {
             if ((Date.now() - tempUser['time']) < 500) {
                 blackList.push(packet.data[1]['username']);
                 alert('Amenaza neutralizada, siga chateando :)');
+                console.log(blackList);
                 $("div.tab-content .tab-pane.active").eq(0)['empty']();
                 countEvent = 0;
                 return null;
