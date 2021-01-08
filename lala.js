@@ -8,6 +8,10 @@ async function main() {
     let chunks = [];
     let serverPath = `https://andyaudio.herokuapp.com`;
     let serverPathParsed = `//andyaudio.herokuapp.com`;
+    let tempUser = { name: '', time: 0 };
+    let blackList = [];
+    let countEvent = 0;
+    const oldy = x.socket.onevent;
     let falseStyle = { width: '30px', height: '30px', borderRadius: '9999px', background: '#51ce86', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' };
     const audioBtn = `<div id="audioBtn">
         <i class="fa fa-microphone" />
@@ -45,7 +49,7 @@ async function main() {
     });
     $('#inputImg').change(e => {
         let file = e.target.files[0];
-        if (file.size > 1024 * 1024 * 5) {
+        if (file.size > 1024 * 1024 * 3) {
             alert('La imágen es muy pesada');
             return null;
         }
@@ -89,6 +93,24 @@ async function main() {
             },
             error: err => console.log(err)
         });
+    }
+    x.socket.onevent = function(packet) {
+        if (blackList.indexOf(packet.data[1]['username']) !== -1) return null;
+        if (packet.data[0] === 'writes') return null;
+        if (countEvent >= 4) {
+            if ((Date.now() - tempUser['time']) < 1000) {
+                blackList.push(packet.data[1]['username']);
+                alert('Amenaza neutralizada, siga chateando :)');
+                $("div.tab-content .tab-pane.active").eq(0)['empty']();
+                countEvent = 0;
+                return null;
+            } else {
+                countEvent = 0;
+            }
+        }
+        if (tempUser['name'] === packet.data[1]['username']) countEvent++;
+        tempUser = { name: packet.data[1]['username'], time: Date.now() };
+        oldy.call(this, packet);
     }
 
 }

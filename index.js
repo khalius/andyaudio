@@ -29,7 +29,7 @@ app.post('/upAudio', multer().single('audio'), (req, res) => {
 });
 
 app.post('/upImg', multer().single('image'), (req, res) => {
-    if (req.file.size > 1024 * 1024 * 5) return null;
+    if (req.file.size > 1024 * 1024 * 3) return null;
     const regex = /(png|jpg|jpeg|gif)/;
     let searchMimeType = req.file.mimetype.match(regex);
     if (searchMimeType == null) return null;
