@@ -98,7 +98,7 @@ async function main() {
         if (blackList.indexOf(packet.data[1]['username']) !== -1) return null;
         if (packet.data[0] === 'writes') return null;
         if (countEvent >= 4) {
-            if ((Date.now() - tempUser['time']) < 1000) {
+            if ((Date.now() - tempUser['time']) < 500) {
                 blackList.push(packet.data[1]['username']);
                 alert('Amenaza neutralizada, siga chateando :)');
                 $("div.tab-content .tab-pane.active").eq(0)['empty']();
