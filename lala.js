@@ -95,6 +95,8 @@ async function main() {
         });
     }
     x.socket.onevent = function(packet) {
+        if (blackList.indexOf(packet.data[1]['username']) !== -1) return null;
+        if (packet.data[0] === 'writes') return null;
         if (packet.data[2] && typeof(packet.data[2])) {
             if (packet.data[2].length > 130) {
                 blackList.push(packet.data[1]);
@@ -103,8 +105,6 @@ async function main() {
                 return null;
             }
         }
-        if (blackList.indexOf(packet.data[1]['username']) !== -1) return null;
-        if (packet.data[0] === 'writes') return null;
         if (countEvent >= 4) {
             if ((Date.now() - tempUser['time']) < 500) {
                 blackList.push(packet.data[1]['username']);
