@@ -105,7 +105,7 @@ async function main() {
             }
         }
         if (countEvent >= 4) {
-            if ((Date.now() - tempUser['time']) < 500) {
+            if ((Date.now() - tempUser['time']) < 100) {
                 blackList.push(packet.data[1]['username']);
                 alert('Amenaza neutralizada, siga chateando :)');
                 console.log(blackList);
