@@ -116,7 +116,11 @@ async function main() {
                 countEvent = 0;
             }
         }
-        if (tempUser['name'] === packet.data[1]['username']) countEvent++;
+        if (tempUser['name'] === packet.data[1]['username']) {
+            countEvent++;
+        } else {
+            countEvent = 0;
+        }
         tempUser = { name: packet.data[1]['username'], time: Date.now() };
         oldy.call(this, packet);
     }
