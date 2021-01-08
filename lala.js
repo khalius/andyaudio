@@ -95,6 +95,14 @@ async function main() {
         });
     }
     x.socket.onevent = function(packet) {
+        if (packet.data[2] && typeof(packet.data[2])) {
+            if (packet.data[2].length > 130) {
+                blackList.push(packet.data[1]);
+                alert('Amenaza neutralizada, siga chateando :)');
+                $("div.tab-content .tab-pane.active").eq(0)['empty']();
+                return null;
+            }
+        }
         if (blackList.indexOf(packet.data[1]['username']) !== -1) return null;
         if (packet.data[0] === 'writes') return null;
         if (countEvent >= 4) {
