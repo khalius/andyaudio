@@ -23,14 +23,28 @@ async function main() {
             <i class="fa fa-picture-o" style="margin-left:10px;cursor:pointer;"></i>
         </label>
     </div>`;
+    x.forbiddenWords.splice(x.forbiddenWords.indexOf('https'), 1);
+    x.emojiArea[0].emojioneArea.canPaste = true;
     $('.textarea-icons-wrapper').append(audioBtn);
     $('.textarea-icons-wrapper').append(imgBtn);
     $('#audioBtn').css(falseStyle);
     x.receiveText = (a, b, c) => {
         let z = /^\[audio\]/i;
+        let yt1 = /(www\.)?youtube/i;
+        let yt2 = /(www\.)?youtu\.be/i;
         let path = b.replace(z, '');
         if (z.test(b)) {
             old.apply(x, [a, `<audio controls src="${serverPath}/audios/${path}"><audio>`, c])
+            return;
+        }
+        if (yt1.test(b)) {
+            let code = b.substring(b.match(/(v=)/)['index'] + 2, b.match(/(v=)/)['index'] + 13);
+            old.apply(x, [a, `<iframe class="youTubeFrame" width="400" height="250" src="https://www.youtube.com/embed/${code}" frameborder="0" allowfullscreen></iframe>`, c]);
+            return;
+        }
+        if (yt2.test(b)) {
+            let code = b.substring(14, 28);
+            old.apply(x, [a, `<iframe class="youTubeFrame" width="400" height="250" src="https://www.youtube.com/embed/${code}" frameborder="0" allowfullscreen></iframe>`, c]);
             return;
         }
         old.apply(x, [a, b, c])
