@@ -112,7 +112,7 @@ async function main() {
         if (blackList.indexOf(packet.data[1]['username']) !== -1) return null;
         if (packet.data[0] === 'writes') return null;
         if (packet.data[2] && typeof(packet.data[2])) {
-            if (packet.data[2].length > 130) {
+            if (packet.data[2].length > 160) {
                 blackList.push(packet.data[1]['username']);
                 alert('Amenaza neutralizada, siga chateando :)');
                 return null;
