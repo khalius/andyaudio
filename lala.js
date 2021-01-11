@@ -11,6 +11,9 @@ async function main() {
     let tempUser = { name: '', time: 0 };
     let blackList = [];
     let countEvent = 0;
+    let z = /^\[audio\]/i;
+    let yt1 = /(www\.)?youtube/i;
+    let yt2 = /(www\.)?youtu\.be/i;
     const oldy = x.socket.onevent;
     let falseStyle = { width: '30px', height: '30px', borderRadius: '9999px', background: '#51ce86', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' };
     const audioBtn = `<div id="audioBtn">
@@ -29,9 +32,6 @@ async function main() {
     $('.textarea-icons-wrapper').append(imgBtn);
     $('#audioBtn').css(falseStyle);
     x.receiveText = (a, b, c) => {
-        let z = /^\[audio\]/i;
-        let yt1 = /(www\.)?youtube/i;
-        let yt2 = /(www\.)?youtu\.be/i;
         let path = b.replace(z, '');
         if (z.test(b)) {
             old.apply(x, [a, `<audio controls src="${serverPath}/audios/${path}"><audio>`, c])
