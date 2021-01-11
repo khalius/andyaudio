@@ -12,7 +12,7 @@ async function main() {
     let blackList = [];
     let countEvent = 0;
     let z = /^\[audio\]/i;
-    let yt1 = /(www\.)?youtube/i;
+    let yt1 = /(www\.)?youtube\.com/i;
     let yt2 = /(www\.)?youtu\.be/i;
     const oldy = x.socket.onevent;
     let falseStyle = { width: '30px', height: '30px', borderRadius: '9999px', background: '#51ce86', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' };
@@ -38,6 +38,7 @@ async function main() {
             return;
         }
         if (yt1.test(b)) {
+            console.log(b)
             let code = b.substring(b.match(/(v=)/)['index'] + 2, b.match(/(v=)/)['index'] + 13);
             old.apply(x, [a, `<iframe class="youTubeFrame" width="400" height="250" src="https://www.youtube.com/embed/${code}" frameborder="0" allowfullscreen></iframe>`, c]);
             return;
