@@ -43,7 +43,7 @@ async function main() {
             return;
         }
         if (yt2.test(b)) {
-            let code = b.substring(pp.length - 11)
+            let code = b.substring(b.length - 11);
             old.apply(x, [a, `<iframe class="youTubeFrame" width="400" height="250" src="https://www.youtube.com/embed/${code}" frameborder="0" allowfullscreen></iframe>`, c]);
             return;
         }
