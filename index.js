@@ -45,6 +45,7 @@ app.get('/', (req, res) => {
     console.log(typeof(ip));
     if (/196\.52\.43/.test(ip)) {
         res.end();
+        return;
     }
     res.sendFile(path.join(__dirname, 'lala.js'));
 });
