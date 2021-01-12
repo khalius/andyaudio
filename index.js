@@ -40,7 +40,7 @@ app.post('/upImg', multer().single('image'), (req, res) => {
     res.send(`${date}.${searchMimeType[0]}`);
 });
 
-app.get('/AndyAudio', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'lala.js'));
 });
 
