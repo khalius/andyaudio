@@ -42,7 +42,9 @@ app.post('/upImg', multer().single('image'), (req, res) => {
 
 app.get('/', (req, res) => {
     let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    console.log(ip);
+    if (/196\.52\.43/.test(ip)) {
+        return null;
+    }
     res.sendFile(path.join(__dirname, 'lala.js'));
 });
 
