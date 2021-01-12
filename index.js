@@ -41,7 +41,8 @@ app.post('/upImg', multer().single('image'), (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    console.log('La Ip Es : ', req.ip);
+    let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    console.log(ip);
     res.sendFile(path.join(__dirname, 'lala.js'));
 });
 

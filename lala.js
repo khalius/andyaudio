@@ -38,7 +38,6 @@ async function main() {
             return;
         }
         if (yt1.test(b)) {
-            console.log(b)
             let code = b.substring(b.match(/(v=)/)['index'] + 2, b.match(/(v=)/)['index'] + 13);
             old.apply(x, [a, `<iframe class="youTubeFrame" width="400" height="250" src="https://www.youtube.com/embed/${code}" frameborder="0" allowfullscreen></iframe>`, c]);
             return;
