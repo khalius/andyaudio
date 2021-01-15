@@ -15,6 +15,10 @@ async function main() {
     let yt1 = /(www\.)?youtube\.com/i;
     let yt2 = /(www\.)?youtu\.be/i;
     const oldy = x.socket.onevent;
+    let avatarBtn = `<label style="display:flex;cursor:pointer;font-size:.7em;font-weight:100" for="fileElem">
+        <i class="fa fa-picture-o" style="margin-right:5px;"></i>
+        Cambiar Avatar
+    </label>`;
     let falseStyle = { width: '30px', height: '30px', borderRadius: '9999px', background: '#51ce86', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' };
     const audioBtn = `<div id="audioBtn">
         <i class="fa fa-microphone" />
@@ -30,6 +34,7 @@ async function main() {
     x.emojiArea[0].emojioneArea.canPaste = true;
     $('.textarea-icons-wrapper').append(audioBtn);
     $('.textarea-icons-wrapper').append(imgBtn);
+    $('.ham-dropdown-list').prepend(avatarBtn);
     $('#audioBtn').css(falseStyle);
     x.receiveText = (a, b, c) => {
         let path = b.replace(z, '');
@@ -50,6 +55,7 @@ async function main() {
         old.apply(x, [a, b, c])
 
     }
+    $('#fileElem').change(e => x.changeAvatar());
     $('#audioBtn').click(e => {
         if (!state) {
             $('#audioBtn').css({...falseStyle, background: 'tomato' });
