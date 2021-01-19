@@ -15,7 +15,7 @@ async function main() {
     let yt1 = /(www\.)?youtube\.com/i;
     let yt2 = /(www\.)?youtu\.be/i;
     const oldy = x.socket.onevent;
-    let avatarBtn = `<label style="display:flex;cursor:pointer;font-size:.7em;font-weight:100" for="fileElem">
+    let avatarBtn = `<label style="display:flex;cursor:pointer;font-size:.7em;font-weight:100;margin:6px 10px;color:blueviolet;" for="fileElem">
         <i class="fa fa-picture-o" style="margin-right:5px;"></i>
         Cambiar Avatar
     </label>`;
