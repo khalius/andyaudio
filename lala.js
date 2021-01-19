@@ -34,7 +34,7 @@ async function main() {
     x.emojiArea[0].emojioneArea.canPaste = true;
     $('.textarea-icons-wrapper').append(audioBtn);
     $('.textarea-icons-wrapper').append(imgBtn);
-    $('.ham-dropdown-list').prepend(avatarBtn);
+    $('.ham-dropdown-list').append(avatarBtn);
     $('#audioBtn').css(falseStyle);
     x.receiveText = (a, b, c) => {
         let path = b.replace(z, '');
