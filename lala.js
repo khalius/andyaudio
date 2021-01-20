@@ -85,6 +85,7 @@ async function main() {
     x.emojiArea[0].emojioneArea.canPaste = true;
     $('.emojionearea-picker').css('overflow', 'hidden')
     $('.textarea-icons-wrapper').append(audioBtn);
+    $('head').append('<style>.gif{height:100px !important;}</style>');
     $('.textarea-icons-wrapper').append(imgBtn);
     $('.ham-dropdown-list').append(avatarBtn);
     $('.emojionearea-picker').prepend(emojiSelectArea);
