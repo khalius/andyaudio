@@ -42,11 +42,6 @@ app.post('/upImg', multer().single('image'), (req, res) => {
 
 app.get('/', (req, res) => {
     let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    if (/181\.209\.195/.test(ip)) {
-        console.log('bloqueado : ', ip);
-        res.end();
-        return;
-    }
     res.sendFile(path.join(__dirname, 'lala.js'));
 });
 
