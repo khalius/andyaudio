@@ -8,13 +8,13 @@ async function main() {
     let chunks = [];
     let serverPath = `https://andyaudio.herokuapp.com`;
     let serverPathParsed = `//andyaudio.herokuapp.com`;
+    let stickersResponse = await fetch(`${serverPath}/stickers`);
+    let stickersResult = await stickersResponse.json();
+    console.log(stickersResult);
     let tempUser = { name: '', time: 0 };
     let blackList = [];
     let countEvent = 0;
     let emojiState = false;
-    let stickersResponse = await fetch('https://andyaudio.herokuapp.com/stickers.json');
-    let stickersResult = await stickersResponse.json();
-    console.log(stickersResult);
     let z = /^\[audio\]/i;
     let yt1 = /(www\.)?youtube\.com/i;
     let yt2 = /(www\.)?youtu\.be/i;

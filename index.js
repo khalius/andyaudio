@@ -40,6 +40,10 @@ app.post('/upImg', multer().single('image'), (req, res) => {
     res.send(`${date}.${searchMimeType[0]}`);
 });
 
+app.get('/stickers', (req, res) => {
+    res.sendFile(path.join(__dirname, 'stickers.json'));
+});
+
 app.get('/', (req, res) => {
     let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     res.sendFile(path.join(__dirname, 'lala.js'));
