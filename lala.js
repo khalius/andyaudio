@@ -10,17 +10,33 @@ async function main() {
     let serverPathParsed = `//andyaudio.herokuapp.com`;
     let stickersResponse = await fetch(`${serverPath}/stickers`);
     let stickersResult = await stickersResponse.json();
-    console.log(stickersResult);
     let tempUser = { name: '', time: 0 };
     let blackList = [];
     let countEvent = 0;
     let emojiState = false;
+    let stickerState = 0;
     let z = /^\[audio\]/i;
     let yt1 = /(www\.)?youtube\.com/i;
     let yt2 = /(www\.)?youtu\.be/i;
     const oldy = x.socket.onevent;
     let stickersArea = `
-        <div id="stickersArea" style="width:316px;height:236px;position:relative;top:0;left:0;display:grid;grid-template-columns:1fr 1fr 1fr;overflow-x:hidden;overflow-y:auto;gap:5px;padding:10px;">
+        <div id="stickersArea" style="width:316px;height:236px;position:relative;top:0;left:0;overflow-x:hidden;">
+
+            <div id="stickSelector" style="height:35px;width:316px;display:grid;grid-template-columns:repeat(10, 1fr);">
+                <img src="${stickersResult[0].love[0]}" style="width:100%;cursor:pointer;" class="stickSelect" pos="0" category="love"/>
+                <img src="${stickersResult[1].angry[0]}" style="width:100%;cursor:pointer;" class="stickSelect" pos="1" category="angry"/>
+                <img src="${stickersResult[2].happy[0]}" style="width:100%;cursor:pointer;" class="stickSelect" pos="2" category="happy"/>
+                <img src="${stickersResult[3].sad[0]}" style="width:100%;cursor:pointer;" class="stickSelect" pos="3" category="sad"/>
+                <img src="${stickersResult[4].confused[0]}" style="width:100%;cursor:pointer;" class="stickSelect" pos="4" category="confused"/>
+                <img src="${stickersResult[5].eat[0]}" style="width:100%;cursor:pointer;" class="stickSelect" pos="5" category="eat"/>
+                <img src="${stickersResult[6].sleep[0]}" style="width:100%;cursor:pointer;" class="stickSelect" pos="6" category="sleep"/>
+                <img src="${stickersResult[7].music[0]}" style="width:100%;cursor:pointer;" class="stickSelect" pos="7" category="music"/>
+                <img src="${stickersResult[8].cool[0]}" style="width:100%;cursor:pointer;" class="stickSelect" pos="8" category="cool"/>
+                <img src="${stickersResult[9].crazy[0]}" style="width:100%;cursor:pointer;" class="stickSelect" pos="9" category="crazy"/>
+            </div>
+
+            <div id="stickersShow" style="width:100%;display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;padding:10px;overflow-x:hidden;overflow-y:auto;"></div>
+
         </div>
     `;
     let emojiSelectArea = `<div style="display:flex;width:100%;justify-content:space-around;align-items:center;">
@@ -146,6 +162,22 @@ async function main() {
         $('#emojis').css(emojiActiveStyles[2]);
         $('.emojionearea-wrapper').css('display', 'none');
         emojiState = !emojiState;
+        return;
+    });
+    $('.stickSelect').click(e => {
+        let pos = e.target.getAttribute('pos');
+        if (pos === stickerState) return;
+        $('#stickersShow').html('');
+        let category = e.target.getAttribute('category');
+        stickersResult[pos][category].forEach(item => {
+            $('#stickersShow').append(`<img src=${item} style="width:100%;cursor:pointer;" class="stickr"/>`);
+        });
+        $('.stickr').click(e => {
+            let stickrLink = e.target.getAttribute('src').replace(/https?\:/, '');
+            x.emojiArea[0].emojioneArea.setHTML(`<img class="gif" src="${stickrLink}"/>`);
+            x.sendText();
+        });
+        stickerState = pos;
         return;
     });
     mediaRecorder.ondataavailable = e => {
