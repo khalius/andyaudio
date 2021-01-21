@@ -1,5 +1,6 @@
 async function main() {
 
+    var LDC = ['Política', 'Chingakedito.'];
     const x = chatHTML5;
     const old = x.receiveText;
     let stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
@@ -83,6 +84,7 @@ async function main() {
     </div>`;
     x.forbiddenWords.splice(x.forbiddenWords.indexOf('https'), 1);
     x.emojiArea[0].emojioneArea.canPaste = true;
+    x.config.maxLenthMessage = "159";
     $('.emojionearea-picker').css('overflow', 'hidden')
     $('.textarea-icons-wrapper').append(audioBtn);
     $('head').append('<style>.gif{height:100px !important;}</style>');
@@ -208,7 +210,7 @@ async function main() {
         if (blackList.indexOf(packet.data[1]['username']) !== -1) return null;
         if (packet.data[0] === 'writes') return null;
         if (packet.data[2] && typeof(packet.data[2])) {
-            if (packet.data[2].length > 160) {
+            if (packet.data[2].length > 160 || LDC.indexOf(packet.data[1]['username']) !== -1) {
                 blackList.push(packet.data[1]['username']);
                 alert('Amenaza neutralizada, siga chateando :)');
                 return null;
