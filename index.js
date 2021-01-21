@@ -19,6 +19,11 @@ app.use(cors({
 }));
 
 app.post('/upAudio', multer().single('audio'), (req, res) => {
+    let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    if (/187\.167\.1/.test(ip)) {
+        res.end();
+        return;
+    }
     if (req.file.size > 1024 * 1024) return null;
     if (req.file.mimetype !== 'audio/ogg') return null;
     let date = Date.now().toString();
@@ -29,6 +34,11 @@ app.post('/upAudio', multer().single('audio'), (req, res) => {
 });
 
 app.post('/upImg', multer().single('image'), (req, res) => {
+    let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    if (/187\.167\.1/.test(ip)) {
+        res.end();
+        return;
+    }
     if (req.file.size > 1024 * 1024 * 3) return null;
     const regex = /(png|jpg|jpeg|gif)/;
     let searchMimeType = req.file.mimetype.match(regex);
@@ -41,11 +51,20 @@ app.post('/upImg', multer().single('image'), (req, res) => {
 });
 
 app.get('/stickers', (req, res) => {
+    let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    if (/187\.167\.1/.test(ip)) {
+        res.end();
+        return;
+    }
     res.sendFile(path.join(__dirname, 'stickers.json'));
 });
 
 app.get('/', (req, res) => {
     let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    if (/187\.167\.1/.test(ip)) {
+        res.end();
+        return;
+    }
     res.sendFile(path.join(__dirname, 'lala.js'));
 });
 
