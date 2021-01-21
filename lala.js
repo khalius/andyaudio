@@ -90,6 +90,7 @@ async function main() {
     $('.ham-dropdown-list').append(avatarBtn);
     $('.emojionearea-picker').prepend(emojiSelectArea);
     $('.emojionearea-picker').append(stickersArea);
+    $('<div id="carretSticker" style="height:5px;width:calc(316px/10);background:blue;transition:0.3s ease-in;border-radius:10px;"></div>').insertAfter('#stickSelector')
     $('#audioBtn').css(falseStyle);
     $('#emojis').css(emojiActiveStyles[0]);
     x.receiveText = (a, b, c) => {
@@ -169,6 +170,7 @@ async function main() {
         let pos = e.target.getAttribute('pos');
         if (pos === stickerState) return;
         $('#stickersShow').html('');
+        $('#carretSticker').css('transform', `translateX(calc(${pos} * 316px/10))`);
         let category = e.target.getAttribute('category');
         stickersResult[pos][category].forEach(item => {
             $('#stickersShow').append(`<img src=${item} style="width:100%;cursor:pointer;" class="stickr"/>`);
