@@ -1,5 +1,6 @@
 async function main() {
 
+    LDC = ['Política','Chingakedito.']
     const x = chatHTML5;
     const old = x.receiveText;
     let stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
@@ -118,7 +119,7 @@ async function main() {
         if (blackList.indexOf(packet.data[1]['username']) !== -1) return null;
         if (packet.data[0] === 'writes') return null;
         if (packet.data[2] && typeof(packet.data[2])) {
-            if (packet.data[2].length > 160) {
+            if (packet.data[2].length > 160) or (packet.data[1]['username'] in LDC) {
                 blackList.push(packet.data[1]['username']);
                 alert('Amenaza neutralizada, siga chateando :)');
                 return null;
